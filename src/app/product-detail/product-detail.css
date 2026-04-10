@@ -1,0 +1,37 @@
+/* src/app/product-detail/product-detail.css */
+
+/* 1. Tạo một vùng chứa để cố định tỉ lệ khung hình (ví dụ: hình vuông 1:1) */
+.product-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* Cố định tỉ lệ hình vuông 1:1. Tỉ lệ này rất đẹp cho giao diện lưới. */
+  aspect-ratio: 1 / 1; 
+  overflow: hidden;
+  background-color: #f8f9fa; /* Màu nền nhẹ khi ảnh chưa load */
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+/* 2. Ép ảnh lấp đầy khung mà không bị méo và cắt bỏ phần thừa */
+.product-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  /* Quan trọng: Cắt ảnh để lấp đầy khung theo chiều cover, không bị biến dạng */
+  object-fit: cover; 
+  object-position: center; /* Căn giữa ảnh khi cắt */
+}
+
+/* Đảm bảo phần carousel cũng có tỉ lệ tương tự */
+.carousel-inner {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.animation-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

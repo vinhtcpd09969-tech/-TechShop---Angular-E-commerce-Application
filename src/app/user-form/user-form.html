@@ -1,0 +1,81 @@
+<div class="container my-5">
+  <div class="row bg-white rounded shadow-sm border p-4">
+    
+    <div class="col-md-7 pe-md-4 border-end">
+      <h4 class="mb-4 text-primary">Thông tin người dùng mới</h4>
+      
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control" formControlName="username" 
+                 [class.is-invalid]="f['username'].touched && f['username'].invalid">
+          <div class="invalid-feedback" *ngIf="f['username'].hasError('required')">Bắt buộc nhập username.</div>
+          <div class="invalid-feedback" *ngIf="f['username'].hasError('invalidUsername')">Bắt đầu bằng chữ cái, không chứa khoảng trắng/ký tự đặc biệt.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Họ tên</label>
+          <input type="text" class="form-control" formControlName="fullName"
+                 [class.is-invalid]="f['fullName'].touched && f['fullName'].invalid">
+          <div class="invalid-feedback" *ngIf="f['fullName'].hasError('required')">Bắt buộc nhập họ tên.</div>
+          <div class="invalid-feedback" *ngIf="f['fullName'].hasError('minlength')">Tên phải >= 3 ký tự.</div>
+          <div class="invalid-feedback" *ngIf="f['fullName'].hasError('invalidFullName')">Phải từ 2 từ trở lên, không chứa số/ký tự đặc biệt.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" formControlName="email"
+                 [class.is-invalid]="f['email'].touched && f['email'].invalid">
+          <div class="invalid-feedback" *ngIf="f['email'].hasError('required')">Bắt buộc nhập email.</div>
+          <div class="invalid-feedback" *ngIf="f['email'].hasError('email')">Email không đúng định dạng.</div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6">
+            <label class="form-label">Tuổi</label>
+            <input type="number" class="form-control" formControlName="age"
+                   [class.is-invalid]="f['age'].touched && f['age'].invalid">
+            <div class="invalid-feedback">Tuổi phải từ 18 - 60.</div>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Giới tính</label>
+            <select class="form-select" formControlName="gender">
+              <option value="Male">Nam</option>
+              <option value="Female">Nữ</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Ảnh đại diện</label>
+          <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*"
+                 [class.is-invalid]="imageError || (f['avatar'].touched && f['avatar'].invalid)">
+          <div class="invalid-feedback">{{ imageError || 'Bắt buộc chọn ảnh.' }}</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" [disabled]="userForm.invalid">
+          Submit
+        </button>
+
+      </form>
+    </div>
+
+    <div class="col-md-5 ps-md-4 d-flex flex-column align-items-center justify-content-center">
+      <h5 class="text-muted mb-4">Preview Card</h5>
+      
+      <div class="card p-4 text-center shadow-sm w-100 bg-light border-0" style="max-width: 300px;">
+        <img [src]="avatarPreview" class="rounded-circle mx-auto mb-3 border border-3 border-white shadow" width="120" height="120" style="object-fit: cover;">
+        <h5 class="fw-bold">{{ f['fullName'].value || 'Họ và tên' }}</h5>
+        <p class="text-muted small mb-3">@{{ f['username'].value || 'username' }}</p>
+        
+        <div class="text-start bg-white p-3 rounded border small">
+          <div>📧 {{ f['email'].value || 'email@example.com' }}</div>
+          <div class="mt-2">🎂 {{ f['age'].value || '0' }} tuổi</div>
+          <div class="mt-2">⚧ {{ f['gender'].value === 'Male' ? 'Nam' : 'Nữ' }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center p-5 bg-white rounded shadow border">
+      
+      <div class="mb-4">
+        <i class="fa-solid fa-user-graduate text-primary" style="font-size: 4rem;"></i>
+      </div>
+      
+      <h2 class="text-primary fw-bold mb-4">Thông tin Sinh viên</h2>
+      
+      <h3 class="fw-bold text-dark mb-3">Họ và tên: <span class="text-danger">{{ studentName }}</span></h3>
+      
+      <p class="fs-5 text-muted mb-2">
+        <i class="fa-regular fa-id-card me-2"></i>Mã Sinh Viên: <span class="fw-bold text-dark">{{ studentId }}</span>
+      </p>
+      
+      <p class="fs-5 text-muted mb-4">
+        <i class="fa-solid fa-chalkboard-user me-2"></i>Lớp: <span class="fw-bold text-dark">{{ className }}</span>
+      </p>
+      
+      <hr class="w-50 mx-auto my-4">
+      
+      <button class="btn btn-primary btn-lg px-5 rounded-pill shadow-sm fw-bold" routerLink="/products">.
+        <i class="fa-solid fa-shop me-2"></i> Khám phá Cửa hàng
+      </button>
+
+    </div>
+  </div>
+</div>
